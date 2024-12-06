@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: jukebox
+
+resources:
+- 0-namespace.yaml
+- 1-deployment.yaml
+- 2-service.yaml
+- 3-hpa.yaml
+- 4-ingress.yaml

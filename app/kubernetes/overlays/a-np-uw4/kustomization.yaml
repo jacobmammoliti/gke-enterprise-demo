@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base/jukebox
+
+patches:
+- target:
+    kind: Ingress
+    name: jukebox
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: jukebox.np-uw4.cloud.coldbrewlabs.ca

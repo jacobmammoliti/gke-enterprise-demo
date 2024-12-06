@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: jukebox
+  namespace: argocd
+spec:
+  generators:
+  - plugin:
+      configMapRef:
+        name: argocd-fleet-sync
+      input:
+        parameters:
+          fleetProjectNumber: "$FLEET_PROJECT_NUMBER"
+      requeueAfterSeconds: 10
+  template:
+    metadata:
+      name: '{{ nameShort }}-jukebox'
+    spec:
+      project: default
+      source:
+        path: app/kubernetes/overlays/{{ nameShort }}
+        repoURL: https://github.com/jacobmammoliti/gke-enterprise-demo
+        targetRevision: HEAD
+      destination:
+        server: '{{ server }}'
+        namespace: jukebox
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false

@@ -1,0 +1,43 @@
+---
+vpc:
+  name: core
+  psa_ranges:
+    - name: primary
+      range: 192.168.0.0/24 # 192.168.0.1 - 192.168.0.254 (254 usable addresses)
+  subnets:
+    non-production:
+      - region: northamerica-northeast2
+        ip_cidr: 10.0.0.0/18 # 10.0.0.1 - 10.0.63.254 (16,382 usable addresses)
+        psc_range: 10.1.0.1/32 # 10.2.0.1 only
+        secondary_ranges:
+          pods: 10.3.0.0/22 # 10.3.0.1 - 10.3.3.254 (1,022 usable addresses)
+          services: 10.3.4.0/24 # 10.3.4.1 - 10.3.4.254 (254 usable addresses)
+      - region: us-west4
+        ip_cidr: 100.0.0.0/18 # 100.0.0.1-100.0.63.254 (16,382 usable addresses)
+        psc_range: 100.1.0.1/32 # 100.2.0.1 only
+        secondary_ranges:
+          pods: 100.3.0.0/22 # 100.3.0.1 - 100.3.3.254 (1,022 usable addresses)
+          services: 100.3.4.0/24 # 100.3.4.1 - 100.3.4.254 (254 usable addresses)
+    production:
+      - region: northamerica-northeast2
+        ip_cidr: 10.100.0.0/18 # 10.100.0.1 - 10.100.63.254 (16,382 usable addresses)
+        psc_range: 10.101.0.1/32 # 10.102.0.1 only
+        secondary_ranges:
+          pods: 10.103.0.0/22 # 10.103.0.1 - 10.103.3.254 (1,022 usable addresses)
+          services: 10.103.4.0/24 # 10.103.4.1 - 10.103.4.254 (254 usable addresses)
+      - region: us-west4
+        ip_cidr: 100.100.0.0/18 # 100.100.0.1-100.100.63.254 (16,382 usable addresses)
+        psc_range: 100.101.0.1/32 # 100.102.0.1 only
+        secondary_ranges:
+          pods: 100.103.0.0/22 # 100.103.0.1 - 100.103.3.254 (1,022 usable addresses)
+          services: 100.103.4.0/24 # 100.103.4.1 - 100.103.4.254 (254 usable addresses)
+clusters:
+  - region: northamerica-northeast2 # Toronto
+    type: control
+    tier: non-production
+  - region: us-west4 # Las Vegas
+    type: application
+    tier: non-production
+  - region: northamerica-northeast2 # Toronto
+    type: application
+    tier: non-production

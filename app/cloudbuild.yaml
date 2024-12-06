@@ -1,0 +1,20 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t',
+    '$LOCATION-docker.pkg.dev/$PROJECT_ID/af-$LOCATION-docker/jukebox:1.0',
+    '-t',
+    '$LOCATION-docker.pkg.dev/$PROJECT_ID/af-$LOCATION-docker/jukebox:latest',
+    '.']
+
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',
+    '$LOCATION-docker.pkg.dev/$PROJECT_ID/af-$LOCATION-docker/jukebox',
+    '--all-tags'
+    ]
+
+# Store images in Google Artifact Registry
+images:
+  - $LOCATION-docker.pkg.dev/$PROJECT_ID/af-$LOCATION-docker/jukebox:1.0
+  - $LOCATION-docker.pkg.dev/$PROJECT_ID/af-$LOCATION-docker/jukebox:latest
