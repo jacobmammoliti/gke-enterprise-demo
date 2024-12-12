@@ -6,9 +6,9 @@ resources:
 
 patches:
 - target:
-    kind: Ingress
+    kind: VirtualService
     name: jukebox
   patch: |-
     - op: replace
-      path: /spec/rules/0/host
+      path: /spec/hosts/0
       value: jukebox.np-nane2.cloud.coldbrewlabs.ca
