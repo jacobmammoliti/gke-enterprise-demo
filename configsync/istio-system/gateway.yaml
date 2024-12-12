@@ -4,8 +4,6 @@ metadata:
   name: application-gateway
   namespace: istio-system
 spec:
-  selector:
-    app: application-gateway-controller
   servers:
   - port:
       number: 80
