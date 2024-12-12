@@ -8,4 +8,4 @@ resources:
 - 1-deployment.yaml
 - 2-service.yaml
 - 3-hpa.yaml
-- 4-ingress.yaml
+- 4-virtualservice.yaml
