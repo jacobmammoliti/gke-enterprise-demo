@@ -9,9 +9,6 @@ spec:
   gateways:
   - istio-system/application-gateway
   http:
-  - match:
-    - uri:
-        prefix: /
     route:
     - destination:
         port:
